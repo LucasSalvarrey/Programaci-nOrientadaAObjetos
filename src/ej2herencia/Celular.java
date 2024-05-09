@@ -1,5 +1,7 @@
 package ej2herencia;
 
+import javax.swing.JOptionPane;
+
 public  abstract class Celular {
 	private String marca;
 	private String modelo;
@@ -58,25 +60,29 @@ public  abstract class Celular {
 				+ perdidaBateria + "]";
 	}
 	public boolean HacerLlamada(int duracion, Celular celular) {
+		if (this.VerEstado()&&celular.VerEstado()) {
+			if (this.getPerdidaBateria()*duracion < this.getBateria() &&
+					celular.getPerdidaBateria()*duracion < celular.getBateria()) {
+				JOptionPane.showMessageDialog(null, "Llamada exitosa");
+				this.setBateria(this.getBateria()-this.getPerdidaBateria()*duracion);
+				celular.setBateria(celular.getBateria()-celular.getPerdidaBateria()*duracion);
+			} else {
+
+			}
+		} else {
+
+		}
 		return true;
 	}
-	//if(this.VerEstado() && celular.VerEstado())
-	//if(this.getPerdidaBateria()*duracion
-	//<celular.getBateria())
-	//mostrar "llamada exitosa";
-	//else
-	//mostrar "la llamada dura mas que la bateria disponible";
-	//else
-	//mostrar "alguno de los dos celulares esta apagado";
-	//this.setBateria(this.getBateria-)
 	public boolean VerEstado() {
-		return true;
-	}
-	//if (this.getBateria()==0)
-	//return false;
-	//else
-	//return true;
-	public void RegargarCelular(){
+		if (this.getPerdidaBateria()==0) {
+			return false;
+		} else {
+			return true;
+		}
 		
+	}
+	public void RegargarCelular(){
+		this.setBateria(5);
 	}
 }
